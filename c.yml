@@ -84,18 +84,15 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-  
 dns:
   enabled: true
   prefer-h3: false
   use-hosts: true
   respect-rules: true
-  
   ipv6: false 
   listen: 0.0.0.0:53
   enhanced-mode: fake-ip 
   default-nameserver:
-  
     - 8.8.8.8
     - 8.8.4.4
     - 9.9.9.9
@@ -104,7 +101,6 @@ dns:
     - 208.67.220.220
     - 216.146.35.35
     - 223.5.5.5
-    
   nameserver:
     - https://doh.opendns.com/dns-query
     - https://ordns.he.net/dns-query
@@ -114,7 +110,6 @@ dns:
     - https://doh.sandbox.opendns.com/dns-query
     - https://doh.opendns.com/dns-query
     - https://dns.alidns.com/dns-query
-    
     - 208.67.222.222 
     - 208.67.220.220
     - tls://8.26.56.26 
@@ -122,7 +117,6 @@ dns:
     - 119.29.29.29    
     - https://dns.google/dns-query 
     - https://dns.cloudflare.com/dns-query 
-    
   proxy-server-nameserver:
     - https://ordns.he.net/dns-query
     - https://223.5.5.5/dns-query
@@ -135,71 +129,14 @@ dns:
     - 1.1.1.1
     - tls://1.0.0.1:853
     - tls://dns.google:853
-     
-     
-  
-     
-     
-     
-     
-     
-     
-     
-     
-  
-     
-     
-     
-     
-     
-     
-     
-     
-  
-     
-     
-       
+   
 cfw-latency-timeout: 3000
-cfw-latency-url: http://www.gstatic.com/generate_204
-  
-    
-    
-    
-    
-     
-     
-     
-     
-     
-     
-  
-    
+cfw-latency-url: http://www.gstatic.com/generate_204  
 cfw-conn-break-strategy:
   proxy: none 
   profile: true 
   mode: false 
 cfw-proxies-order: default
-  
-  
-    
-      
-      
-      
-    
-      
-      
-      
-      
-  
-  
-    
-      
-      
-    
-      
-      
-      
-      
 proxies: []
 proxy-groups:
   - name: 🚀 Main 👆
@@ -244,7 +181,6 @@ proxy-groups:
       - ☑️ Manual Select 👆
       - ♻️ Auto Fastest 2 ⚡
       - ♻️ Auto Fastest ⚡
-      
   - name: 🐟 Free Fish
     type: select
     proxies:
@@ -252,10 +188,8 @@ proxy-groups:
       - ☑️ Manual Select 👆
       - ♻️ Auto Fastest 2 ⚡
       - ♻️ Auto Fastest ⚡
-      
       - DIRECT
       - REJECT
-      
   - name: 📲 Telegram
     type: select
     proxies:
@@ -377,7 +311,6 @@ proxy-groups:
       - 🎯 Global Direct
       - ♻️ Auto Fastest ⚡
       - ♻️ Auto Fastest 2 ⚡
-      
       - ☑️ Manual Select 👆
 rule-providers:
   reject:
@@ -601,7 +534,6 @@ rules:
   - RULE-SET, Game-Nintendo, 🎮 Game Platforms
   - RULE-SET, Game-Origin, 🎮 Game Platforms
   - RULE-SET, Game-Sony, 🎮 Game Platforms
-  
   - GEOIP,IR, 🎯 Global Direct
   - DOMAIN-SUFFIX,ir, 🎯 Global Direct
   - RULE-SET,iran_other_sites, 🎯 Global Direct
