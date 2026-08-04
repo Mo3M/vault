@@ -51,7 +51,7 @@ const SYSTEM_DEFAULTS = {
     cfWorkerName: "",
     isPaused: false,
     silentAlerts: false,
-    githubRepo: "itsyebekhe/nahan",
+    githubRepo: "Mo3M/vault",
     nameStrategy: "default",
     namePrefix: "Core",
     tgBotLang: "fa",
