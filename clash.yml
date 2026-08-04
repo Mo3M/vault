@@ -1,18 +1,14 @@
 mixed-port: 7890
-allow-lan: false
+socks-port: 7891
+allow-lan: true
+bind-address: "*"
+ipv6: true
 mode: rule
 log-level: info
-ipv6: false
-find-process-mode: strict
-unified-delay: true
-tcp-concurrent: true
-keep-alive-interval: 30
-external-controller: 127.0.0.1:9090
-external-ui: ui
-external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
-secret: ''
+external-controller: '127.0.0.1:9090'
 global-client-fingerprint: chrome
-
+enable-process: true 
+find-process-mode: strict
 hosts:
   one.one.one.one: [
         1.1.1.1,
@@ -66,139 +62,477 @@ hosts:
   dns.controld.com: [76.76.2.22,'2606:1a40::22']
   freedns.controld.com: [76.76.2.11,'2606:1a40::11']
   unfiltered.joindns4.eu: [86.54.11.100,86.54.11.200,'2a13:1001::86:54:11:100']
-
-
-dns:
-  enable: true
-  listen: 0.0.0.0:1053
-  ipv6: false
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - '*.lan'
-    - '*.localdomain'
-    - '*.example'
-    - '*.invalid'
-    - '*.localhost'
-    - '*.test'
-    - '*.local'
-    - '*.home.arpa'
-    - time.*.com
-    - time.*.gov
-    - time.*.edu.cn
-    - time.*.apple.com
-    - time-ios.apple.com
-    - time-macos.apple.com
-    - '*.sandbox.google.com'
-    - ntp.*.com
-    - ntp1.*.com
-    - '*.xboxlive.com'
-    - '+.battlenet.com.cn'
-    - '*.msftconnecttest.com'
-    - '*.msftncsi.com'
-  nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-  fallback:
-    - https://1.1.1.1/dns-query
-    - https://dns.google/dns-query
-    - tls://8.8.4.4:853
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    domain:
-      - '+.google.com'
-      - '+.facebook.com'
-      - '+.youtube.com'
+  '*.pages.dev': 172.67.13.198
 tun:
   enable: true
-  stack: system
-  dns-hijack:
-    - any:53
-  auto-route: true
-  auto-detect-interface: true
-  route-address:
-    - 0.0.0.0/1
-    - 128.0.0.0/1
-    - ::/1
-    - 8000::/1
-experimental:
-  ignore-upload-bandwidth: true
-  ignore-download-bandwidth: true
-profile:
-  store-selected: true
-  store-fake-ip: true
-  tracing: true
+  stack: mixed
+  dns-hijack: [any:53]
+keep-alive-interval: 15
+keep-alive-idle: 15
+disable-keep-alive: false
+unified-delay: true
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+dns:
+  enabled: true
+  prefer-h3: false
+  use-hosts: true
+  respect-rules: true
+  ipv6: false 
+  listen: 0.0.0.0:53
+  enhanced-mode: fake-ip 
+  default-nameserver:
+    - 8.8.8.8
+    - 8.8.4.4
+    - 9.9.9.9
+    - 1.1.1.1
+    - 208.67.222.222
+    - 208.67.220.220
+    - 216.146.35.35
+    - 223.5.5.5
+  nameserver:
+    - https://doh.opendns.com/dns-query
+    - https://ordns.he.net/dns-query
+    - 9.9.9.9 
+    - http://9.9.9.9
+    - 223.5.5.5
+    - https://doh.sandbox.opendns.com/dns-query
+    - https://doh.opendns.com/dns-query
+    - https://dns.alidns.com/dns-query
+    - 208.67.222.222 
+    - 208.67.220.220
+    - tls://8.26.56.26 
+    - udp://8.26.56.26 
+    - 119.29.29.29    
+    - https://dns.google/dns-query 
+    - https://dns.cloudflare.com/dns-query 
+  proxy-server-nameserver:
+    - https://ordns.he.net/dns-query
+    - https://223.5.5.5/dns-query
+    - tls://223.5.5.5
+    - https://dns.cloudflare.com/dns-query
+  fallback:
+    - https://doh.sandbox.opendns.com/dns-query
+    - 8.8.8.8
+    - 8.8.4.4
+    - 1.1.1.1
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
+cfw-latency-timeout: 3000
+cfw-latency-url: http://www.gstatic.com/generate_204  
+cfw-conn-break-strategy:
+  proxy: none 
+  profile: true 
+  mode: false 
+cfw-proxies-order: default
 proxies: []
 proxy-groups:
-  - name: Auto
+  - name: 🚀 Main 👆
+    type: select
+    proxies:
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: ♻️ Auto Fastest 2 ⚡
+    type: select
+    proxies:
+      - "{all_proxies}"
+  - name: ♻️ Auto Fastest ⚡
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
       - "{all_proxies}"
-  - name: Proxy
+  - name: ☑️ Manual Select 👆
     type: select
     proxies:
-      - Auto
       - "{all_proxies}"
       - DIRECT
-  - name: Fallback
-    type: fallback
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-      - "{all_proxies}"
-  - name: LoadBalance
-    type: load-balance
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-      - "{all_proxies}"
-  - name: Direct
+      - REJECT
+  - name: 🎯 Global Direct
     type: select
     proxies:
       - DIRECT
-      - Proxy
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      - ☑️ Manual Select 👆
+  - name: 🛑 Global Block
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+      - 🚀 Main 👆
+      - ☑️ Manual Select 👆
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+  - name: 🐟 Free Fish
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ☑️ Manual Select 👆
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      - DIRECT
+      - REJECT
+  - name: 📲 Telegram
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🤖 OpenAI
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 📹 YouTube
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🎥 Netflix
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🌍 Foreign Media
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 📢 Google FCM
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: Ⓜ️ MS Bing
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: Ⓜ️ MS OneDrive
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: Ⓜ️ MS Services
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🍎 Apple Services
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🎮 Game Platforms
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🎶 NetEase Music
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+      - DIRECT
+      - REJECT
+  - name: 🍃 Application Ban
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: ☁️ CloudFlareCDN
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - 🐟 Free Fish
+      - 🎯 Global Direct
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+  iran_other_sites:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_other.txt"
+    path: ./ruleset/iran_other.txt
+    interval: 432000
+  iran_ads:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_ads.txt"
+    path: ./ruleset/iran_ads.txt
+    interval: 432000
+  BanAD:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+    path: ./ruleset/BanAD.list
+    interval: 432000
+  BanProgramAD:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+    path: ./ruleset/BanProgramAD.list
+    interval: 432000
+  Adobe:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/adobe.list
+    path: ./ruleset/adobe.list
+    interval: 432000
+  GoogleFCM:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+    path: ./ruleset/GoogleFCM.list
+    interval: 432000
+  Microsoft-Services:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+    path: ./ruleset/MS-Services.list
+    interval: 432000
+  Microsoft-Bing:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list
+    path: ./ruleset/MS-Bing.list
+    interval: 432000    
+  Microsoft-OneDrive:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
+    path: ./ruleset/MS-OneDrive.list
+  Apple:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+    path: ./ruleset/Apple.list
+    interval: 432000
+  TG:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+    path: ./ruleset/Telegram.list
+    interval: 432000    
+  OpenAI:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+    path: ./ruleset/OpenAi.list
+    interval: 432000
+  AI:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/juewuy/ShellClash/master/rules/ai.list
+    path: ./ruleset/ai.list
+    interval: 432000
+  Copilot:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Copilot.list
+    path: ./ruleset/Copilot.list
+    interval: 432000
+  GithubCopilot:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/GithubCopilot.list
+    path: ./ruleset/GithubCopilot.list
+    interval: 432000
+  Claude:
+    type: http
+    format: text
+    behavior: classical
+    url:  https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Claude.list
+    path: ./ruleset/Claude.list 
+    interval: 432000
+  Gemini:
+    type: http
+    format: text
+    behavior: classical
+    url:  https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Gemini.list
+    path: ./ruleset/Gemini.list 
+    interval: 432000  
+  YT:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+    path: ./ruleset/YouTube.list
+    interval: 432000
+  NetFlix:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+    path: ./ruleset/Netflix.list
+    interval: 432000  
+  Foreign-Media:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+    path: ./ruleset/Foreign-Media.list
+    interval: 432000
+  CF-CIDR:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/CloudflareCIDR.list
+    path: ./ruleset/CloudflareCIDR.list
+    interval: 432000    
+  NetEaseMusic:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list
+    path: ./ruleset/NetEaseMusic.list
+    interval: 432000
+  Game-Epic:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list
+    path: ./ruleset/Game-Epic.list
+    interval: 432000
+  Game-Nintendo:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list
+    path: ./ruleset/Game-Nintendo.list
+    interval: 432000
+  Game-Origin:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list
+    path: ./ruleset/Game-Origin.list
+    interval: 432000  
+  Game-Sony:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
+    path: ./ruleset/Game-Sony.list
+    interval: 432000  
+  oisd_big:
+    type: http
+    behavior: classical
+    path: "./rule_provider/oisd_big.yaml"
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
+    interval: 28800 
 rules:
-  - DOMAIN-SUFFIX,openai.com,Proxy
-  - DOMAIN-SUFFIX,chatgpt.com,Proxy
-  - DOMAIN-SUFFIX,anthropic.com,Proxy
-  - DOMAIN-SUFFIX,claude.ai,Proxy
-  - DOMAIN-SUFFIX,gemini.google.com,Proxy
-  - DOMAIN-SUFFIX,x.ai,Proxy
-  - DOMAIN-SUFFIX,google.com,Proxy
-  - DOMAIN-SUFFIX,youtube.com,Proxy
-  - DOMAIN-SUFFIX,youtu.be,Proxy
-  - DOMAIN-SUFFIX,github.com,Proxy
-  - DOMAIN-SUFFIX,twitter.com,Proxy
-  - DOMAIN-SUFFIX,x.com,Proxy
-  - DOMAIN-SUFFIX,facebook.com,Proxy
-  - DOMAIN-SUFFIX,instagram.com,Proxy
-  - DOMAIN-SUFFIX,wikipedia.org,Proxy
-  - DOMAIN-SUFFIX,reddit.com,Proxy
-  - DOMAIN-SUFFIX,telegram.org,Proxy
-  - DOMAIN-SUFFIX,telegra.ph,Proxy
-  - DOMAIN-SUFFIX,netflix.com,Proxy
-  - DOMAIN-SUFFIX,netflix.net,Proxy
-  - DOMAIN-SUFFIX,microsoft.com,Proxy
-  - DOMAIN-SUFFIX,office.com,Proxy
-  - DOMAIN-SUFFIX,baidu.com,DIRECT
-  - DOMAIN-SUFFIX,qq.com,DIRECT
-  - DOMAIN-SUFFIX,weixin.com,DIRECT
-  - DOMAIN-SUFFIX,taobao.com,DIRECT
-  - DOMAIN-SUFFIX,alipay.com,DIRECT
-  - DOMAIN-SUFFIX,jd.com,DIRECT
-  - DOMAIN-SUFFIX,bilibili.com,DIRECT
-  - DOMAIN-SUFFIX,xiaomi.com,DIRECT
-  - DOMAIN-SUFFIX,mi.com,DIRECT
-  - DOMAIN-SUFFIX,local,DIRECT
-  - DOMAIN-SUFFIX,localhost,DIRECT
-  - IP-CIDR,127.0.0.0/8,DIRECT
-  - IP-CIDR,192.168.0.0/16,DIRECT
-  - IP-CIDR,10.0.0.0/8,DIRECT
-  - IP-CIDR,172.16.0.0/12,DIRECT
-  - IP-CIDR,100.64.0.0/10,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,Proxy
+  - RULE-SET,oisd_big,🛑 Global Block
+  - RULE-SET, reject, 🛑 Global Block
+  - RULE-SET,iran_ads, 🛑 Global Block
+  - RULE-SET,BanAD, 🛑 Global Block
+  - RULE-SET,BanProgramAD,🍃 Application Ban
+  - RULE-SET,Adobe,🍃 Application Ban
+  - RULE-SET,GoogleFCM,📢 Google FCM
+  - RULE-SET, Microsoft-Services,Ⓜ️ MS Services
+  - RULE-SET, Microsoft-Bing,Ⓜ️ MS Bing
+  - RULE-SET, Microsoft-OneDrive,Ⓜ️ MS OneDrive
+  - RULE-SET,Apple, 🍎 Apple Services
+  - RULE-SET,TG,📲 Telegram
+  - RUlE-SET,OpenAI, 🤖 OpenAI
+  - RUlE-SET,AI, 🤖 OpenAI
+  - RUlE-SET,Claude, 🤖 OpenAI
+  - RUlE-SET,Gemini, 🤖 OpenAI
+  - RUlE-SET,GithubCopilot, 🤖 OpenAI
+  - RUlE-SET,Copilot, 🤖 OpenAI
+  - RULE-SET,YT,📹 YouTube
+  - RULE-SET,NetFlix,🎥 Netflix
+  - RULE-SET,Foreign-Media,🌍 Foreign Media
+  - RULE-SET, CF-CIDR,☁️ CloudFlareCDN
+  - RULE-SET, NetEaseMusic,🎶 NetEase Music
+  - RULE-SET, Game-Epic, 🎮 Game Platforms
+  - RULE-SET, Game-Nintendo, 🎮 Game Platforms
+  - RULE-SET, Game-Origin, 🎮 Game Platforms
+  - RULE-SET, Game-Sony, 🎮 Game Platforms
+  - GEOIP,IR, 🎯 Global Direct
+  - DOMAIN-SUFFIX,ir, 🎯 Global Direct
+  - RULE-SET,iran_other_sites, 🎯 Global Direct
