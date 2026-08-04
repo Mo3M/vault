@@ -7471,7 +7471,7 @@ async function fetchTemplates(env) {
     const repo = sysConfig.githubRepo || "Mo3M/vault";
     if (!clashTemplate) {
         try {
-            let res = await fetch(`https://raw.githubusercontent.com/${repo}/main/c.yml`);
+            let res = await fetch(`https://raw.githubusercontent.com/${repo}/main/clash.yml`);
             if (res.ok) clashTemplate = await res.text();
         } catch(e) {}
     }
