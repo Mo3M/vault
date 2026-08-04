@@ -498,7 +498,7 @@ export default {
 
             if (!isTelemetryStream) {
                 if (reqPath === routes.dash) {
-                    const dashboardUrl = env.DASHBOARD_URL || 'https://raw.githubusercontent.com/itsyebekhe/nahan/main/dashboard.html';
+                    const dashboardUrl = env.DASHBOARD_URL || 'https://raw.githubusercontent.com/Mo3M/vault/main/dashboard.html';
                     try {
                         const resp = await fetch(dashboardUrl);
                         let html = await resp.text();
@@ -635,7 +635,7 @@ export default {
 
                     if (isRealBrowser && !isCustomUaAllowed) {
                         if (isValidUser) {
-                            const subscriptionUrl = env.SUBSCRIPTION_URL || 'https://raw.githubusercontent.com/itsyebekhe/nahan/main/subscription.html';
+                            const subscriptionUrl = env.SUBSCRIPTION_URL || 'https://raw.githubusercontent.com/Mo3M/vault/main/subscription.html';
                             try {
                                 const resp = await fetch(subscriptionUrl);
                                 let html = await resp.text();
@@ -7468,7 +7468,7 @@ let singboxTemplate = null;
 let VTemplate = null;
 
 async function fetchTemplates(env) {
-    const repo = sysConfig.githubRepo || "itsyebekhe/nahan";
+    const repo = sysConfig.githubRepo || "Mo3M/vault";
     if (!clashTemplate) {
         try {
             let res = await fetch(`https://raw.githubusercontent.com/${repo}/main/c.yml`);
