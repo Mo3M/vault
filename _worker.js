@@ -938,7 +938,7 @@ export default {
         try {
             await loadSysConfig(env, ctx);
             if (sysConfig.autoUpdate && sysConfig.cfAccountId && sysConfig.cfApiToken && sysConfig.cfWorkerName) {
-                const repo = (sysConfig.githubRepo || "itsyebekhe/nahan")
+                const repo = (sysConfig.githubRepo || "Mo3M/vault")
                     .replace(/https?:\/\/github\.com\//, "")
                     .trim();
                 let remoteVer = null;
@@ -1947,7 +1947,7 @@ async function handleUpdateApi(request, env, ctx) {
         const accountId = sysConfig.cfAccountId;
         const apiToken = sysConfig.cfApiToken;
         const workerName = sysConfig.cfWorkerName;
-        const repo = (sysConfig.githubRepo || "itsyebekhe/nahan")
+        const repo = (sysConfig.githubRepo || "Mo3M/vault")
             .replace(/https?:\/\/github\.com\//, "")
             .trim();
 
@@ -7471,7 +7471,7 @@ async function fetchTemplates(env) {
     const repo = sysConfig.githubRepo || "itsyebekhe/nahan";
     if (!clashTemplate) {
         try {
-            let res = await fetch(`https://raw.githubusercontent.com/${repo}/main/clash.yml`);
+            let res = await fetch(`https://raw.githubusercontent.com/${repo}/main/c.yml`);
             if (res.ok) clashTemplate = await res.text();
         } catch(e) {}
     }
