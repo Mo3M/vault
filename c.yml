@@ -370,9 +370,215 @@ cfw-proxies-order: default
 
 # A
 # A
-proxies: ~
+# proxies: ~
 
-proxy-groups: ~
+# proxy-groups: ~
+
+
+
+
+proxies: []
+
+proxy-groups:
+  - name: 🚀 Main 👆
+    type: select
+    proxies:
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+
+  - name: ♻️ Auto Fastest 2 ⚡
+    type: select
+    proxies:
+      - "{all_proxies}"
+
+  - name: ♻️ Auto Fastest ⚡
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - "{all_proxies}"
+
+  - name: ☑️ Manual Select 👆
+    type: select
+    proxies:
+      - "{all_proxies}"
+      - DIRECT
+      - REJECT
+
+  - name: 🎯 Global Direct
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      - ☑️ Manual Select 👆
+  - name: 🛑 Global Block
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+      - 🚀 Main 👆
+      - ☑️ Manual Select 👆
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      
+  - name: 🐟 Free Fish
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ☑️ Manual Select 👆
+      - ♻️ Auto Fastest 2 ⚡
+      - ♻️ Auto Fastest ⚡
+      
+      - DIRECT
+      - REJECT
+      
+
+  - name: 📲 Telegram
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🤖 OpenAI
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 📹 YouTube
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🎥 Netflix
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🌍 Foreign Media
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 📢 Google FCM
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: Ⓜ️ MS Bing
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: Ⓜ️ MS OneDrive
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: Ⓜ️ MS Services
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🍎 Apple Services
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🎮 Game Platforms
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🎶 NetEase Music
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      - ☑️ Manual Select 👆
+
+      - DIRECT
+      - REJECT
+  - name: 🍃 Application Ban
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: ☁️ CloudFlareCDN
+    type: select
+    proxies:
+      - 🚀 Main 👆
+      - 🐟 Free Fish
+      - 🎯 Global Direct
+      - ♻️ Auto Fastest ⚡
+      - ♻️ Auto Fastest 2 ⚡
+      
+      - ☑️ Manual Select 👆
+
+
+###############
+
 
 
 # ==================================================== START
