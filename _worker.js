@@ -7814,34 +7814,239 @@ async function buildYamlProfile(hostName, targetSub = null, allowInsecure = fals
     // Build proxy-groups YAML
     let groupsYaml =
         "proxy-groups:\n" +
-        '  - name: "✅ Selector"\n' +
+        '  - name: "🚀 Main 👆"\n' +
         "    type: select\n" +
         "    proxies:\n" +
-        '      - "⚡ Fastest"\n' +
-        '      - "🖐 Manual"\n';
+		'      - ☑️ Manual Select 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';
+    sortedCountries.forEach(([country, info]) => {
+        groupsYaml += `      - "${info.flag} ${country}"\n`;
+    });
+	
+    // Manual — select with ALL proxies
+    groupsYaml +=
+        '\n  - name: ☑️ Manual Select 👆\n' + "    type: select\n" + "    proxies:\n";
+    proxyNames.forEach((n) => {
+        groupsYaml += `      - ${n}\n`;
+    });
+	
+    groupsYaml +=
+        '\n  - name: 🎯 Global Direct\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+        '      - DIRECT\n' +		
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+		'      - REJECT\n';							
+		
+    groupsYaml +=
+        '\n  - name: 🛑 Global Block\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+        '      - REJECT\n' +
+        '      - DIRECT\n' +		
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n';
+
+	
+    // 🐟 Free Fish
+    groupsYaml +=
+        '\n  - name: 🐟 Free Fish\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+		'      - ☑️ Manual Select 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';
     sortedCountries.forEach(([country, info]) => {
         groupsYaml += `      - "${info.flag} ${country}"\n`;
     });
 
+    // Fastest 2 — url-test with ALL proxies
+    groupsYaml +=
+        '\n  - name: ♻️ Auto Fastest 2 ⚡\n' +
+        "    type: select\n" +
+        "    proxies:\n";
+    proxyNames.forEach((n) => {
+        groupsYaml += `      - ${n}\n`;
+    });
+	
     // Fastest — url-test with ALL proxies
     groupsYaml +=
-        '\n  - name: "⚡ Fastest"\n' +
+        '\n  - name: ♻️ Auto Fastest ⚡\n' +
         "    type: url-test\n" +
         '    url: "https://www.gstatic.com/generate_204"\n' +
-        "    interval: 30\n" +
+        "    interval: 300\n" +
         "    tolerance: 50\n" +
         "    proxies:\n";
     proxyNames.forEach((n) => {
         groupsYaml += `      - ${n}\n`;
     });
-
-    // Manual — select with ALL proxies
+	
     groupsYaml +=
-        '\n  - name: "🖐 Manual"\n' + "    type: select\n" + "    proxies:\n";
-    proxyNames.forEach((n) => {
-        groupsYaml += `      - ${n}\n`;
-    });
+        '\n  - name: 📲 Telegram\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+	
+    groupsYaml +=
+        '\n  - name: 🤖 OpenAI\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+	
+    groupsYaml +=
+        '\n  - name: 📹 YouTube\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+		
+    groupsYaml +=
+        '\n  - name: 🎥 Netflix\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+		
+    groupsYaml +=
+        '\n  - name: 🌍 Foreign Media\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';			
+		
+    groupsYaml +=
+        '\n  - name: 📢 Google FCM\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+				
+    groupsYaml +=
+        '\n  - name: Ⓜ️ MS Bing\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+		
+    groupsYaml +=
+        '\n  - name: Ⓜ️ MS OneDrive\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+				
+    groupsYaml +=
+        '\n  - name: Ⓜ️ MS Services\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+				
+    groupsYaml +=
+        '\n  - name: 🍎 Apple Services\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+				
+    groupsYaml +=
+        '\n  - name: 🎮 Game Platforms\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';	
+				
+    groupsYaml +=
+        '\n  - name: 🎶 NetEase Music\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';			
+				
+    groupsYaml +=
+        '\n  - name: 🍃 Application Ban\n' +
+        "    type: select\n" +
+        "    proxies:\n" + 
+        '      - 🛑 Global Block\n' +		
+		'      - 🎯 Global Direct\n';	
 
+    groupsYaml +=
+        '\n  - name: ☁️ CloudFlareCDN\n' +
+        "    type: select\n" +
+        "    proxies:\n" +
+		'      - 🚀 Main 👆\n' +
+        '      - ♻️ Auto Fastest 2 ⚡\n' +
+		'      - ♻️ Auto Fastest ⚡\n' +
+		'      - ☑️ Manual Select 👆\n'+		
+        '      - DIRECT\n' +
+		'      - REJECT\n';					
+
+
+
+	
     // Per-country url-test groups
     sortedCountries.forEach(([country, info]) => {
         groupsYaml +=
@@ -7875,6 +8080,36 @@ async function buildYamlProfile(hostName, targetSub = null, allowInsecure = fals
     let rulesOutput = customRules.length > 0 
         ? customRules.join("\n") 
         : `  - DOMAIN-SUFFIX,ir,DIRECT
+  - RULE-SET,oisd_big,🛑 Global Block
+  - RULE-SET, reject, 🛑 Global Block
+  - RULE-SET,iran_ads, 🛑 Global Block
+  - RULE-SET,BanAD, 🛑 Global Block
+  - RULE-SET,BanProgramAD,🍃 Application Ban
+  - RULE-SET,Adobe,🍃 Application Ban
+  - RULE-SET,GoogleFCM,📢 Google FCM
+  - RULE-SET, Microsoft-Services,Ⓜ️ MS Services
+  - RULE-SET, Microsoft-Bing,Ⓜ️ MS Bing
+  - RULE-SET, Microsoft-OneDrive,Ⓜ️ MS OneDrive
+  - RULE-SET,Apple, 🍎 Apple Services
+  - RULE-SET,TG,📲 Telegram
+  - RUlE-SET,OpenAI, 🤖 OpenAI
+  - RUlE-SET,AI, 🤖 OpenAI
+  - RUlE-SET,Claude, 🤖 OpenAI
+  - RUlE-SET,Gemini, 🤖 OpenAI
+  - RUlE-SET,GithubCopilot, 🤖 OpenAI
+  - RUlE-SET,Copilot, 🤖 OpenAI
+  - RULE-SET,YT,📹 YouTube
+  - RULE-SET,NetFlix,🎥 Netflix
+  - RULE-SET,Foreign-Media,🌍 Foreign Media
+  - RULE-SET, CF-CIDR,☁️ CloudFlareCDN
+  - RULE-SET, NetEaseMusic,🎶 NetEase Music
+  - RULE-SET, Game-Epic, 🎮 Game Platforms
+  - RULE-SET, Game-Nintendo, 🎮 Game Platforms
+  - RULE-SET, Game-Origin, 🎮 Game Platforms
+  - RULE-SET, Game-Sony, 🎮 Game Platforms
+  - GEOIP,IR, 🎯 Global Direct
+  - DOMAIN-SUFFIX,ir, 🎯 Global Direct
+  - RULE-SET,iran_other_sites, 🎯 Global Direct
   - DOMAIN-KEYWORD,gov.ir,DIRECT
   - DOMAIN-SUFFIX,fa,DIRECT
   - GEOIP,IR,DIRECT`;
@@ -7912,7 +8147,7 @@ dns:
   hosts:
     "rule-set:category-ads-all": "rcode://refused"
   nameserver:
-    - "https://8.8.8.8/dns-query#✅ Selector"
+    - "https://8.8.8.8/dns-query#🚀 Main 👆"
   proxy-server-nameserver:
     - "8.8.8.8#DIRECT"
   direct-nameserver:
@@ -7941,7 +8176,200 @@ sniffer:
       ports: [80, 8080, 8880, 2052, 2082, 2086, 2095]
     TLS:
       ports: [443, 8443, 2053, 2083, 2087, 2096]
-
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt
+    path: ./ruleset/reject.yaml
+    interval: 86400
+  iran_other_sites:
+    type: http
+    format: text
+    behavior: domain
+    url: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_other.txt
+    path: ./ruleset/iran_other.txt
+    interval: 432000
+  iran_ads:
+    type: http
+    format: text
+    behavior: domain
+    url: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_ads.txt
+    path: ./ruleset/iran_ads.txt
+    interval: 432000
+  BanAD:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+    path: ./ruleset/BanAD.list
+    interval: 432000
+  BanProgramAD:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+    path: ./ruleset/BanProgramAD.list
+    interval: 432000
+  Adobe:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/adobe.list
+    path: ./ruleset/adobe.list
+    interval: 432000
+  GoogleFCM:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+    path: ./ruleset/GoogleFCM.list
+    interval: 432000
+  Microsoft-Services:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+    path: ./ruleset/MS-Services.list
+    interval: 432000
+  Microsoft-Bing:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list
+    path: ./ruleset/MS-Bing.list
+    interval: 432000
+  Microsoft-OneDrive:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
+    path: ./ruleset/MS-OneDrive.list
+  Apple:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+    path: ./ruleset/Apple.list
+    interval: 432000
+  TG:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+    path: ./ruleset/Telegram.list
+    interval: 432000
+  OpenAI:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+    path: ./ruleset/OpenAi.list
+    interval: 432000
+  AI:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/juewuy/ShellClash/master/rules/ai.list
+    path: ./ruleset/ai.list
+    interval: 432000
+  Copilot:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Copilot.list
+    path: ./ruleset/Copilot.list
+    interval: 432000
+  GithubCopilot:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/GithubCopilot.list
+    path: ./ruleset/GithubCopilot.list
+    interval: 432000
+  Claude:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Claude.list
+    path: ./ruleset/Claude.list
+    interval: 432000
+  Gemini:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Gemini.list
+    path: ./ruleset/Gemini.list
+    interval: 432000
+  YT:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+    path: ./ruleset/YouTube.list
+    interval: 432000
+  NetFlix:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+    path: ./ruleset/Netflix.list
+    interval: 432000
+  Foreign-Media:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+    path: ./ruleset/Foreign-Media.list
+    interval: 432000
+  CF-CIDR:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/CloudflareCIDR.list
+    path: ./ruleset/CloudflareCIDR.list
+    interval: 432000
+  NetEaseMusic:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list
+    path: ./ruleset/NetEaseMusic.list
+    interval: 432000
+  Game-Epic:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list
+    path: ./ruleset/Game-Epic.list
+    interval: 432000
+  Game-Nintendo:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list
+    path: ./ruleset/Game-Nintendo.list
+    interval: 432000
+  Game-Origin:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list
+    path: ./ruleset/Game-Origin.list
+    interval: 432000
+  Game-Sony:
+    type: http
+    format: text
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
+    path: ./ruleset/Game-Sony.list
+    interval: 432000
+  oisd_big:
+    type: http
+    behavior: classical
+    path: ./rule_provider/oisd_big.yaml
+    url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
+    interval: 28800
 proxies:
 ${proxies.join("\n")}
 
@@ -7949,7 +8377,7 @@ ${groupsYaml}
 
 rules:
 ${rulesOutput}
-  - MATCH,✅ Selector
+  - MATCH, 🐟 Free Fish
 `;
 }
 
@@ -8377,21 +8805,14 @@ async function buildClashJsonProfile(
     // Build proxy-groups JSON
     let groupsJson = [
         {
-            name: "✅ Selector",
+            name: "🚀 Main 👆",
             type: "select",
             proxies: [
-                "⚡ Fastest",
-                "🖐 Manual",
+			    "🖐 Manual",
+                "♻️ Auto Fastest 2 ⚡",
+				"♻️ Auto Fastest ⚡",                
                 ...sortedCountries.map(([c, info]) => `${info.flag} ${c}`),
             ],
-        },
-        {
-            name: "⚡ Fastest",
-            type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
-            interval: 30,
-            tolerance: 50,
-            proxies: dynamicTags,
         },
         { name: "🖐 Manual", type: "select", proxies: dynamicTags },
         ...sortedCountries.map(([country, info]) => ({
@@ -8402,6 +8823,36 @@ async function buildClashJsonProfile(
             tolerance: 50,
             proxies: info.proxies,
         })),
+				
+        {
+            name: "♻️ Auto Fastest 2 ⚡",
+            type: "select",
+            proxies: dynamicTags,
+        },		
+        {
+            name: "♻️ Auto Fastest ⚡",
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 30,
+            tolerance: 50,
+            proxies: dynamicTags,
+        },
+
+		{
+            name: "🐟 Free Fish",
+            type: "select",
+            proxies: [
+			    "🚀 Main 👆",
+				"🖐 Manual",
+                "♻️ Auto Fastest 2 ⚡",
+				"♻️ Auto Fastest ⚡",
+				"DIRECT",
+				"REJECT",
+                ...sortedCountries.map(([c, info]) => `${info.flag} ${c}`),
+            ],		
+		},
+		
+		
     ];
 
     let cr = getCustomRouting();
@@ -8454,7 +8905,7 @@ async function buildClashJsonProfile(
             hosts: {
                 "rule-set:category-ads-all": "rcode://refused",
             },
-            nameserver: ["https://8.8.8.8/dns-query#✅ Selector"],
+            nameserver: ["https://8.8.8.8/dns-query#🚀 Main 👆"],
             "proxy-server-nameserver": ["8.8.8.8#DIRECT"],
             "direct-nameserver": ["8.8.8.8#DIRECT"],
             "direct-nameserver-follow-policy": true,
@@ -8472,6 +8923,12 @@ async function buildClashJsonProfile(
             "dns-hijack": ["any:53", "tcp://any:53"],
             mtu: 9000,
         },
+
+
+
+
+
+
         sniffer: {
             enable: true,
             "force-dns-mapping": true,
@@ -8489,6 +8946,230 @@ async function buildClashJsonProfile(
         [k_pxs]: proxiesArr,
         [k_px_gps]: groupsJson,
         "rule-providers": {
+            "reject": {
+                type: "http",
+                behavior: "domain",
+                url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt",
+                path: "./ruleset/reject.yaml",
+                interval: 86400,
+			},
+            "iran_other_sites": {
+                type: "http",
+                format: "text",
+                behavior: "domain",
+                url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_other.txt",
+                path: "./ruleset/iran_other.txt",
+                interval: 432000,
+			},
+            "iran_ads": {
+                type: "http",
+                format: "text",
+                behavior: "domain",
+                url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_ads.txt",
+                path: "./ruleset/iran_ads.txt",
+                interval: 432000,
+			},
+            "BanAD": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",
+                path: "./ruleset/BanAD.list",
+                interval: 432000,
+			},
+            "BanProgramAD": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list",
+                path: "./ruleset/BanProgramAD.list",
+                interval: 432000,
+			},
+            "Adobe": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/adobe.list",
+                path: "./ruleset/adobe.list",
+                interval: 432000,
+			},
+            "GoogleFCM": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list",
+                path: "./ruleset/GoogleFCM.list",
+                interval: 432000,
+			},
+            "Microsoft-Services": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list",
+                path: "./ruleset/MS-Services.list",
+                interval: 432000,
+			},
+            "Microsoft-Bing": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list",
+                path: "./ruleset/MS-Bing.list",
+                interval: 432000,
+			},
+            "Microsoft-OneDrive": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list",
+                path: "./ruleset/MS-OneDrive.list",
+				interval: 432000,
+			},
+            "Apple": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list",
+                path: "./ruleset/Apple.list",
+                interval: 432000,
+			},
+            "TG": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list",
+                path: "./ruleset/Telegram.list",
+                interval: 432000,
+			},
+            "OpenAI": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list",
+                path: "./ruleset/OpenAi.list",
+                interval: 432000,
+			},
+            "AI": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/juewuy/ShellClash/master/rules/ai.list",
+                path: "./ruleset/ai.list",
+                interval: 432000,
+			},
+            "Copilot": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Copilot.list",
+                path: "./ruleset/Copilot.list",
+                interval: 432000,
+			},
+            "GithubCopilot": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/GithubCopilot.list",
+                path: "./ruleset/GithubCopilot.list",
+                interval: 432000,
+			},
+            "Claude": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Claude.list",
+                path: "./ruleset/Claude.list",
+                interval: 432000,
+			},
+            "Gemini": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/Gemini.list",
+                path: "./ruleset/Gemini.list",
+                interval: 432000,
+			},
+            "YT": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list",
+                path: "./ruleset/YouTube.list",
+                interval: 432000,
+			},
+            "NetFlix": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list",
+                path: "./ruleset/Netflix.list",
+                interval: 432000,
+			},
+            "Foreign-Media": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list",
+                path: "./ruleset/Foreign-Media.list",
+                interval: 432000,
+			},
+            "CF-CIDR": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/CloudflareCIDR.list",
+                path: "./ruleset/CloudflareCIDR.list",
+                interval: 432000,
+			},
+            "NetEaseMusic": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list",
+                path: "./ruleset/NetEaseMusic.list",
+                interval: 43200,
+			},
+            "Game-Epic": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list",
+                path: "./ruleset/Game-Epic.list",
+                interval: 432000,
+			},
+            "Game-Nintendo": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list",
+                path: "./ruleset/Game-Nintendo.list",
+                interval: 432000,
+			},
+            "Game-Origin": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list",
+                path: "./ruleset/Game-Origin.list",
+                interval: 432000,
+			},
+            "Game-Sony": {
+                type: "http",
+                format: "text",
+                behavior: "classical",
+                url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list",
+                path: "./ruleset/Game-Sony.list",
+                interval: 432000,
+			},
+            "oisd_big": {
+                type: "http",
+                behavior: "classical",
+                path: "./rule_provider/oisd_big.yaml",
+                url: "https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml",
+                interval: 28800,
+            },	
+			
+			
             "category-ads-all": {
                 type: "http",
                 format: "text",
@@ -8515,13 +9196,46 @@ async function buildClashJsonProfile(
             },
         },
         rules: [
-            "GEOIP,lan,DIRECT,no-resolve",
-            "NETWORK,udp,REJECT",
-            "RULE-SET,category-ads-all,REJECT",
-            ...jsonCustomRules,
-            "RULE-SET,ir,DIRECT",
-            "RULE-SET,ir-cidr,DIRECT",
-            "MATCH,✅ Selector",
+           //"GEOIP,lan,DIRECT,no-resolve",
+           //"NETWORK,udp,REJECT",
+           //"RULE-SET,category-ads-all,REJECT",
+           //...jsonCustomRules,
+           //"RULE-SET,ir,DIRECT",
+           //"RULE-SET,ir-cidr,DIRECT",
+           //"MATCH,🐟 Free Fish",
+			
+            "RULE-SET,oisd_big,🛑 Global Block",
+            "RULE-SET, reject, 🛑 Global Block",
+            "RULE-SET,iran_ads, 🛑 Global Block",
+            "RULE-SET,BanAD, 🛑 Global Block",
+            "RULE-SET,BanProgramAD,🍃 Application Ban",
+            "RULE-SET,Adobe,🍃 Application Ban",
+            "RULE-SET,GoogleFCM,📢 Google FCM",
+            "RULE-SET, Microsoft-Services,Ⓜ️ MS Services",
+            "RULE-SET, Microsoft-Bing,Ⓜ️ MS Bing",
+            "RULE-SET, Microsoft-OneDrive,Ⓜ️ MS OneDrive",
+            "RULE-SET,Apple, 🍎 Apple Services",
+            "RULE-SET,TG,📲 Telegram",
+            "RUlE-SET,OpenAI, 🤖 OpenAI",
+            "RUlE-SET,AI, 🤖 OpenAI",
+            "RUlE-SET,Claude, 🤖 OpenAI",
+            "RUlE-SET,Gemini, 🤖 OpenAI",
+            "RUlE-SET,GithubCopilot, 🤖 OpenAI",
+            "RUlE-SET,Copilot, 🤖 OpenAI",
+            "RULE-SET,YT,📹 YouTube",
+            "RULE-SET,NetFlix,🎥 Netflix",
+            "RULE-SET,Foreign-Media,🌍 Foreign Media",
+            "RULE-SET, CF-CIDR,☁️ CloudFlareCDN",
+            "RULE-SET, NetEaseMusic,🎶 NetEase Music",
+            "RULE-SET, Game-Epic, 🎮 Game Platforms",
+            "RULE-SET, Game-Nintendo, 🎮 Game Platforms",
+            "RULE-SET, Game-Origin, 🎮 Game Platforms",
+            "RULE-SET, Game-Sony, 🎮 Game Platforms",
+            "GEOIP,IR, 🎯 Global Direct",
+            "DOMAIN-SUFFIX,ir, 🎯 Global Direct",
+            "RULE-SET,iran_other_sites, 🎯 Global Direct",
+            "MATCH,🐟 Free Fish",
+			
         ],
         ntp: {
             enable: true,
